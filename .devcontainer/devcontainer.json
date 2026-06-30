@@ -9,7 +9,7 @@
   "features": {
     "ghcr.io/devcontainers/features/node:2.1.0": {},
     "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
-    // required for .pixi mount
+    // required for .pixi "mount" option below
     // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
 
@@ -52,7 +52,8 @@
   //"mounts": ["source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"],
 
   "postCreateCommand": {
-    "install-pixi-environment": "sudo chown vscode .pixi && pixi install",
+    //"install-pixi-mount": "sudo chown vscode .pixi && pixi install",
+    "install-pixi-nomount": "pixi install",
     // https://code.claude.com/docs/en/model-config#control-the-model-users-run-on
     "claude-settings": "mkdir -p ~/.claude && cp .devcontainer/claude-settings.json ~/.claude/settings.json"
   }
