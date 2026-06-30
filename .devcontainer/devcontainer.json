@@ -7,7 +7,10 @@
 
   // Install claude and uv for terminal work
   "features": {
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+    "ghcr.io/devcontainers/features/node:2.1.0": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+    // required for .pixi mount
+    // "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
 
   // Prompt each user to set their personal token if not already set
@@ -46,10 +49,10 @@
     }
   },
 
-  "mounts": ["source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"],
+  //"mounts": ["source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"],
 
   "postCreateCommand": {
-    "install-pixi": "sudo chown vscode .pixi && pixi install",
+    "install-pixi-environment": "sudo chown vscode .pixi && pixi install",
     // https://code.claude.com/docs/en/model-config#control-the-model-users-run-on
     "claude-settings": "mkdir -p ~/.claude && cp .devcontainer/claude-settings.json ~/.claude/settings.json"
   }
