@@ -12,5 +12,6 @@ Test building docker image locally:
 ```bash
 docker buildx build --load -t codespace-pixi:test -f .devcontainer/Dockerfile .
 docker images codespace-pixi:test
-docker run --rm -it codespace-pixi:test bash
+docker run --rm -it --hostname codespace-pixi -v $(pwd):/home/vscode codespace-pixi:test
+pixi shell
 ```

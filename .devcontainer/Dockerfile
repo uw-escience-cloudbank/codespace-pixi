@@ -14,7 +14,8 @@ ENV VSCODE_HOME=/home/vscode \
 USER ${VSCODE_USER}
 WORKDIR /home/vscode
 
-RUN echo 'eval "$(pixi completion -s bash)"' >> ${VSCODE_HOME}/.bashrc
+RUN echo 'eval "$(pixi completion -s bash)"' >> ${VSCODE_HOME}/.bashrc \
+    && mkdir -p ${VSCODE_HOME}/.pixi
 
 # Pre-populate the pixi package cache so that onCreateCommand's `pixi install`
 # resolves packages from disk instead of downloading from conda-forge.
