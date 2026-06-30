@@ -1,9 +1,13 @@
 {
   "name": "CloudBank Workshop",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
+
+  // Set pre-build Docker Image
+  "image": "ghcr.io/uw-escience-cloudbank/codespace-pixi:sha-b570b93fd3d1f9179d68192e584e581af3ab5eed",
+  // Or rebuild on every Codespace start (slower)
+  // "build": {
+  //   "dockerfile": "Dockerfile",
+  //   "context": ".."
+  // },
 
   // Install claude and uv for terminal work
   "features": {

@@ -6,8 +6,22 @@ RUN curl -L -o /usr/local/bin/pixi -fsSL --compressed "https://github.com/prefix
     && chmod +x /usr/local/bin/pixi \
     && pixi info
 
+ENV VSCODE_HOME=/home/vscode \
+    VSCODE_USER=vscode \
+    SHELL=/bin/bash
+
 # set some user and workdir settings to work nicely with vscode
-USER vscode
+USER ${VSCODE_USER}
 WORKDIR /home/vscode
 
-RUN echo 'eval "$(pixi completion -s bash)"' >> /home/vscode/.bashrc
+RUN echo 'eval "$(pixi completion -s bash)"' >> ${VSCODE_HOME}/.bashrc
+
+# Pre-populate the pixi package cache so that onCreateCommand's `pixi install`
+# resolves packages from disk instead of downloading from conda-forge.
+# The .pixi env directory is removed afterwards because it will be created
+# inside the Docker volume mount at container-create time.
+COPY --chown=${VSCODE_USER}:${VSCODE_USER} pixi.toml pixi.lock /tmp/pixi-warmup/
+RUN cd /tmp/pixi-warmup \
+    && pixi install --locked \
+    && rm -rf /tmp/pixi-warmup/.pixi \
+    && rm -rf /tmp/pixi-warmup
