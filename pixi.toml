@@ -1,0 +1,12 @@
+[workspace]
+authors = ["Scott Henderson <3924836+scottyhq@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "codespace-pixi"
+platforms = ["osx-arm64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+xarray = ">=2026.4.0,<2027"
+ipykernel = ">=7.3.0,<8"
